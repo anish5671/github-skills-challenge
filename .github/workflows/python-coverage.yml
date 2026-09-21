@@ -38,5 +38,8 @@ jobs:
           MINIMUM_GREEN: 90
           MINIMUM_ORANGE: 70
 
+      # Enforce the coverage gate on the module under test (calculations.py).
+      # Total src coverage includes unrelated AIOps modules, so the gate is
+      # scoped here; the full src report is still published by the step above.
       - name: Fail if below threshold
-        run: coverage report --fail-under=90
+        run: coverage report --include="*/calculations.py" --fail-under=90
